@@ -52,17 +52,31 @@
             padding: 5px 20px;
         }
 
-        /* Hero Section */
+        /* Top Promo Carousel */
+        .promo-carousel .carousel-item {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .promo-overlay {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        /* Hero & Search */
         .hero-section {
             background: linear-gradient(rgba(0, 119, 179, 0.7), rgba(43, 58, 66, 0.8)),
                 url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1920');
             background-size: cover;
             background-position: center;
-            padding: 120px 0;
+            padding: 100px 0;
             color: white;
         }
 
-        /* Search Container */
         .search-container {
             background: white;
             border-radius: 15px;
@@ -73,23 +87,7 @@
             z-index: 10;
         }
 
-        .btn-search {
-            background-color: var(--deep-blue);
-            color: white;
-            transition: 0.3s;
-        }
-
-        .btn-search:hover {
-            background-color: var(--dark-charcoal);
-            color: white;
-        }
-
-        /* Car Cards */
-        .feature-icon {
-            color: var(--deep-blue);
-            font-size: 1.2rem;
-        }
-
+        /* Original Car Card Styling */
         .car-card {
             border: none;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -108,6 +106,19 @@
             padding: 5px 15px;
             border-radius: 20px;
             font-weight: bold;
+        }
+
+        .feature-icon {
+            color: var(--deep-blue);
+            font-size: 1.2rem;
+        }
+
+        /* Mid Carousel */
+        .mid-section-slider {
+            background: #fff;
+            padding: 60px 0;
+            border-radius: 30px;
+            margin: 40px 0;
         }
 
         footer {
@@ -131,9 +142,6 @@
                 <img src="logo.png" alt="Logo" width="60" height="60" class="me-2 logo-white">
                 SAHULAT PRO
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto text-uppercase small fw-bold">
                     <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
@@ -142,12 +150,25 @@
                     <li class="nav-item"><a class="nav-link" href="#">Flight Booking</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
                 </ul>
                 <a href="auth.html" class="btn btn-auth shadow-sm">Login / SignUp</a>
             </div>
         </div>
     </nav>
+
+    <div id="topSlider" class="carousel slide promo-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active"
+                style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920');">
+                <div class="promo-overlay w-100">
+                    <div class="container text-start">
+                        <h2 class="display-3 fw-bold">Premium Fleet</h2>
+                        <p class="lead">The best cars for your special occasions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <header class="hero-section text-center">
         <div class="container">
@@ -161,13 +182,13 @@
             <div class="row mb-4 justify-content-center">
                 <div class="col-auto">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="serviceType" id="radioCar" value="car"
-                            checked onchange="toggleService()">
+                        <input class="form-check-input" type="radio" name="service" id="radioCar" checked
+                            onchange="toggleService()">
                         <label class="form-check-label fw-bold" for="radioCar">🚗 Car Search</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="serviceType" id="radioShuttle"
-                            value="shuttle" onchange="toggleService()">
+                        <input class="form-check-input" type="radio" name="service" id="radioShuttle"
+                            onchange="toggleService()">
                         <label class="form-check-label fw-bold" for="radioShuttle">✈️ Airport Shuttle</label>
                     </div>
                 </div>
@@ -181,17 +202,15 @@
                         <option>Karachi</option>
                         <option>Lahore</option>
                         <option>Islamabad</option>
-                        <option>Faisalabad</option>
-                        <option>Multan</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-bold small">From (Pickup Date)</label>
-                    <input type="datetime-local" id="carFromDate" class="form-control border-0 bg-light" required>
+                    <label class="form-label fw-bold small">Pickup Date</label>
+                    <input type="datetime-local" class="form-control border-0 bg-light" required>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-bold small">To (Return Date)</label>
-                    <input type="datetime-local" id="carToDate" class="form-control border-0 bg-light" required>
+                    <label class="form-label fw-bold small">Return Date</label>
+                    <input type="datetime-local" class="form-control border-0 bg-light" required>
                 </div>
                 <div class="col-md-2">
                     <label class="form-label fw-bold small">Trip Type</label>
@@ -201,64 +220,63 @@
                     </select>
                 </div>
                 <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-search w-100 py-2 fw-bold">SEARCH CARS</button>
-                </div>
-            </form>
-
-            <form class="row g-3 d-none" id="shuttleForm">
-                <div class="col-md-4">
-                    <label class="form-label fw-bold small">Select Airport</label>
-                    <select class="form-select border-0 bg-light" id="airportSelect" required>
-                        <option value="">Choose Airport</option>
-                        <option>Jinnah International (KHI)</option>
-                        <option>Allama Iqbal International (LHE)</option>
-                        <option>Islamabad International (ISB)</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold small">Flight Arrival/Departure Time</label>
-                    <input type="datetime-local" id="shuttleDate" class="form-control border-0 bg-light" required>
-                </div>
-                <div class="col-md-4 d-flex align-items-end">
                     <button type="submit" class="btn btn-search w-100 py-2 fw-bold"
-                        style="background-color: var(--coral);">FIND SHUTTLE</button>
+                        style="background:var(--deep-blue); color:white;">SEARCH CARS</button>
                 </div>
             </form>
         </div>
     </section>
 
+    <section class="container mb-5">
+        <div class="mid-section-slider shadow-sm px-4">
+            <h2 class="text-center fw-bold mb-4">Special Offers For You</h2>
+            <div id="midCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded-4">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200"
+                            class="d-block w-100" style="height:350px; object-fit:cover;">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Wedding Season Discount</h5>
+                            <p>Get 15% off on Audi & Mercedes rentals.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1200"
+                            class="d-block w-100" style="height:350px; object-fit:cover;">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Northern Areas Tour</h5>
+                            <p>Special 4x4 packages for Hunza & Skardu.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#midCarousel"
+                    data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#midCarousel"
+                    data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+        </div>
+    </section>
+
     <section id="results-section" class="container mb-5 d-none">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">Available Fleet</h2>
-        </div>
-        <div class="row g-4" id="car-results-container">
-        </div>
+        <h2 class="fw-bold mb-4">Available Fleet</h2>
+        <div class="row g-4" id="car-results-container"></div>
     </section>
 
     <section class="bg-white py-5">
         <div class="container text-center py-5">
             <h2 class="fw-bold mb-5">Why Choose SAHULAT PRO</h2>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="bi bi-shield-check display-4 text-danger mb-3"></i>
-                        <h4 class="fw-bold">Secure Payments</h4>
-                        <p class="text-muted small">JazzCash, Easypaisa, and PayFast integration.</p>
-                    </div>
+                <div class="col-md-4"><i class="bi bi-shield-check display-4 text-danger mb-3"></i>
+                    <h4 class="fw-bold">Secure Payments</h4>
+                    <p class="text-muted small">JazzCash, Easypaisa, and PayFast integration.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="bi bi-geo-alt display-4 text-primary mb-3"></i>
-                        <h4 class="fw-bold">Live Tracking</h4>
-                        <p class="text-muted small">Real-time GPS tracking via Google Maps.</p>
-                    </div>
+                <div class="col-md-4"><i class="bi bi-geo-alt display-4 text-primary mb-3"></i>
+                    <h4 class="fw-bold">Live Tracking</h4>
+                    <p class="text-muted small">Real-time GPS tracking via Google Maps.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4">
-                        <i class="bi bi-person-badge display-4 text-success mb-3"></i>
-                        <h4 class="fw-bold">Verified Drivers</h4>
-                        <p class="text-muted small">KYC verified professionals for your safety.</p>
-                    </div>
+                <div class="col-md-4"><i class="bi bi-person-badge display-4 text-success mb-3"></i>
+                    <h4 class="fw-bold">Verified Drivers</h4>
+                    <p class="text-muted small">KYC verified professionals for your safety.</p>
                 </div>
             </div>
         </div>
@@ -268,107 +286,65 @@
         <div class="container">
             <div class="row gy-4">
                 <div class="col-md-4">
-                    <img src="logo.png" alt="Logo" width="80" class="mb-3 logo-white">
                     <h4 class="fw-bold">SAHULAT PRO</h4>
                     <p class="small opacity-75">Premium transport solutions prepared by Athar Javed. Your trusted
                         partner for every journey.</p>
                 </div>
-                <div class="col-md-4 ps-md-5">
+                <div class="col-md-4">
                     <h5 class="fw-bold mb-4">Quick Links</h5>
                     <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#">Privacy Policy</a></li>
-                        <li class="mb-2"><a href="#">Terms of Service</a></li>
-                        <li class="mb-2"><a href="#">Refund Policy</a></li>
-                        <li class="mb-2"><a href="#">Driver Registration</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Driver Registration</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5 class="fw-bold mb-4">Contact Support</h5>
                     <p class="small mb-1"><i class="bi bi-telephone me-2"></i> +92 300 1234567</p>
                     <p class="small mb-1"><i class="bi bi-envelope me-2"></i> support@sahulatpro.com</p>
-                    <div class="mt-4">
-                        <i class="bi bi-facebook me-3 fs-5"></i>
-                        <i class="bi bi-instagram me-3 fs-5"></i>
-                        <i class="bi bi-whatsapp fs-5"></i>
-                    </div>
                 </div>
             </div>
             <hr class="mt-5 opacity-25">
-            <p class="text-center small opacity-50 mb-0">© 2026 SAHULAT PRO | Developed by CodeSet Solutions</p>
+            <p class="text-center small opacity-50">© 2026 SAHULAT PRO | Developed by CodeSet Solutions</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
         const dummyCars = [
             { name: "Toyota Corolla Altis", model: "2023", price: "8,500", img: "https://images.unsplash.com/photo-1623860840536-a382b3d27231?q=80&w=800", gear: "Auto", seats: "5", airbags: "Dual" },
-            { name: "Honda Civic RS", model: "2022", price: "12,000", img: "https://images.unsplash.com/photo-1590362891175-3794ef1e992f?q=80&w=800", gear: "CVT", seats: "5", airbags: "6 SRS" },
-            { name: "Suzuki Alto VXL", model: "2023", price: "4,500", img: "https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?q=80&w=800", gear: "AGS", seats: "4", airbags: "Dual" }
+            { name: "Honda Civic RS", model: "2022", price: "12,000", img: "https://images.unsplash.com/photo-1590362891175-3794ef1e992f?q=80&w=800", gear: "CVT", seats: "5", airbags: "6 SRS" }
         ];
 
-        const dummyShuttles = [
-            { name: "Toyota Hiace (Grandia)", model: "2022", price: "15,000", img: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3AtNDAyLW11bmlyLXN0dWRpby1hLXNldC0zNjk5LmpwZw.jpg", gear: "Manual", seats: "12", airbags: "Front" },
-            { name: "Hyundai Staria", model: "2023", price: "18,000", img: "https://images.unsplash.com/photo-1632243193741-b308ad3d02c3?q=80&w=800", gear: "Auto", seats: "10", airbags: "8 SRS" },
-            { name: "Coaster Saloon", model: "2021", price: "25,000", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", gear: "Manual", seats: "22", airbags: "None" }
-        ];
+        function toggleService() { }
 
-        function toggleService() {
-            const isCar = document.getElementById('radioCar').checked;
-            document.getElementById('carForm').classList.toggle('d-none', !isCar);
-            document.getElementById('shuttleForm').classList.toggle('d-none', isCar);
-            document.getElementById('results-section').classList.add('d-none');
-        }
-
-        function renderResults(data, location) {
+        document.getElementById('carForm').addEventListener('submit', function (e) {
+            e.preventDefault();
             const container = document.getElementById('car-results-container');
-            const resultsSection = document.getElementById('results-section');
+            document.getElementById('results-section').classList.remove('d-none');
             container.innerHTML = "";
-            resultsSection.classList.remove('d-none');
-
-            data.forEach(item => {
+            dummyCars.forEach(item => {
                 container.innerHTML += `
                 <div class="col-md-4">
                     <div class="card car-card shadow-sm h-100">
                         <div class="position-relative">
                             <img src="${item.img}" class="card-img-top" style="height:220px; object-fit:cover;">
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="price-tag">PKR ${item.price}</span>
-                            </div>
+                            <div class="position-absolute top-0 end-0 m-3"><span class="price-tag">PKR ${item.price}</span></div>
                         </div>
                         <div class="card-body">
                             <h5 class="fw-bold">${item.name} <span class="text-muted small">(${item.model})</span></h5>
-                            <p class="small text-muted mb-3"><i class="bi bi-geo-alt"></i> Available for ${location}</p>
-                            <div class="row g-2 text-center mb-3">
+                            <div class="row g-2 text-center mb-3 mt-3">
                                 <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-gear-wide-connected feature-icon"></i><div style="font-size:0.7rem">${item.gear}</div></div></div>
                                 <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-people feature-icon"></i><div style="font-size:0.7rem">${item.seats}</div></div></div>
                                 <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-shield-lock feature-icon"></i><div style="font-size:0.7rem">${item.airbags}</div></div></div>
                                 <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-cpu feature-icon"></i><div style="font-size:0.7rem">GPS</div></div></div>
                             </div>
-                            <button class="btn btn-primary w-100 fw-bold" style="background-color: var(--deep-blue); border:none;">BOOK NOW</button>
+                            <button onclick="window.location.href='payment.html'" class="btn btn-primary w-100 fw-bold" style="background-color: var(--deep-blue); border:none;">BOOK NOW</button>
                         </div>
                     </div>
                 </div>`;
             });
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        document.getElementById('carForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            renderResults(dummyCars, document.getElementById('citySelect').value);
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
         });
-
-        document.getElementById('shuttleForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            renderResults(dummyShuttles, document.getElementById('airportSelect').value);
-        });
-
-        window.onload = function () {
-            const now = new Date().toISOString().slice(0, 16);
-            document.getElementById('carFromDate').min = now;
-            document.getElementById('carToDate').min = now;
-            document.getElementById('shuttleDate').min = now;
-        };
     </script>
 </body>
 

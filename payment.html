@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | SAHULAT PRO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-blue: #0077B3;
+            --dark: #1A1A1A;
+            --glass: rgba(255, 255, 255, 0.8);
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .payment-wrapper {
+            padding: 40px 0;
+        }
+
+        /* High-End Credit Card */
+        .card-visual {
+            width: 100%;
+            max-width: 400px;
+            height: 240px;
+            background: linear-gradient(135deg, #001f3f, #0077B3);
+            border-radius: 24px;
+            padding: 30px;
+            color: white;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            margin: 0 auto -80px;
+            transition: transform 0.4s ease;
+        }
+
+        .card-visual:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        .chip {
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .card-number-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Professional Form Container */
+        .checkout-box {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid white;
+            border-radius: 30px;
+            padding: 100px 50px 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #4B5563;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border: 2px solid var(--border);
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(0, 119, 179, 0.1);
+        }
+
+        .order-summary {
+            background: rgba(0, 119, 179, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px dashed var(--primary-blue);
+        }
+
+        .btn-pay-now {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0, 119, 179, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-pay-now:hover {
+            background: #005f8d;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(0, 119, 179, 0.4);
+        }
+
+        .bank-logos img {
+            opacity: 0.6;
+            filter: grayscale(1);
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .bank-logos img:hover {
+            opacity: 1;
+            filter: grayscale(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container payment-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+
+                <a href="index.html" class="text-decoration-none text-dark fw-bold small mb-4 d-inline-block">
+                    <i class="bi bi-chevron-left"></i> CANCEL TRANSACTION
+                </a>
+
+                <div class="card-visual">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="chip"></div>
+                        <i class="bi bi-wifi fs-3 text-white-50"></i>
+                    </div>
+                    <div class="card-number-display" id="preview-number">•••• •••• •••• ••••</div>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <div class="text-white-50 small mb-1" style="font-size: 0.6rem;">CARD HOLDER</div>
+                            <div id="preview-name" class="fw-bold">YOUR NAME</div>
+                        </div>
+                        <div>
+                            <div class="text-white-50 small mb-1" style="font-size: 0.6rem;">EXPIRES</div>
+                            <div id="preview-expiry" class="fw-bold">MM/YY</div>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png"
+                            width="50" style="filter: brightness(0) invert(1);">
+                    </div>
+                </div>
+
+                <div class="checkout-box">
+                    <div class="text-center mb-5">
+                        <h3 class="fw-700">Payment Details</h3>
+                        <p class="text-muted small">Complete your booking for Sahulat Pro</p>
+                    </div>
+
+                    <form id="paymentForm">
+                        <div class="mb-4">
+                            <label class="form-label">CARDHOLDER NAME</label>
+                            <input type="text" class="form-control" id="cardName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">CARD NUMBER</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i
+                                        class="bi bi-credit-card text-muted"></i></span>
+                                <input type="text" class="form-control border-start-0" id="cardNumber"
+                                    placeholder="0000 0000 0000 0000" maxlength="19" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label class="form-label">EXPIRY DATE</label>
+                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM / YY"
+                                    maxlength="5" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">CVV CODE</label>
+                                <input type="password" class="form-control" id="cardCvv" placeholder="123" maxlength="3"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="order-summary mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Toyota Corolla (1 Day)</span>
+                                <span class="fw-bold text-dark">PKR 8,500</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="text-muted">Taxes & Fees</span>
+                                <span class="fw-bold text-dark">PKR 150</span>
+                            </div>
+                            <div class="d-flex justify-content-between pt-3 border-top border-2">
+                                <span class="fw-bold text-dark">TOTAL AMOUNT</span>
+                                <span class="fw-bold fs-5 text-primary">PKR 8,650</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-pay-now w-100">
+                            <i class="bi bi-lock-fill me-2"></i> PAY SECURELY
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="small text-muted mb-3"><i class="bi bi-shield-check text-success"></i> 256-bit SSL
+                            Encrypted Payment</p>
+                        <div class="bank-logos">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png"
+                                width="30">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png"
+                                width="50">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Visa_Logo.png/640px-Visa_Logo.png"
+                                width="40">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cardNumInput = document.getElementById('cardNumber');
+        const cardNameInput = document.getElementById('cardName');
+        const cardExpInput = document.getElementById('cardExpiry');
+
+        cardNumInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            val = val.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = val;
+            document.getElementById('preview-number').innerText = val || '•••• •••• •••• ••••';
+        });
+
+        cardNameInput.addEventListener('input', (e) => {
+            document.getElementById('preview-name').innerText = e.target.value.toUpperCase() || 'YOUR NAME';
+        });
+
+        cardExpInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '').slice(0, 4);
+            if (val.length >= 2) val = val.slice(0, 2) + ' / ' + val.slice(2, 4);
+            e.target.value = val;
+            document.getElementById('preview-expiry').innerText = val || 'MM/YY';
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> PROCESSING...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Payment Successful! Your journey with SAHULAT PRO begins now.');
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+    </script>
+
+</body>
+
+</html>
