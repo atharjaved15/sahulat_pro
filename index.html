@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAHULAT PRO | Premium Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --deep-blue: #0077B3;
+            --light-blue: #A9D6E5;
+            --coral: #FF6F61;
+            --off-white: #F1FAEE;
+            --dark-charcoal: #2B3A42;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--off-white);
+            color: var(--dark-charcoal);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: var(--dark-charcoal);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: var(--light-blue) !important;
+        }
+
+        .logo-white {
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-auth {
+            background-color: var(--coral);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 119, 179, 0.7), rgba(43, 58, 66, 0.8)),
+                url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: white;
+        }
+
+        /* Search Container */
+        .search-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--deep-blue);
+        }
+
+        .btn-search {
+            background-color: var(--deep-blue);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: var(--dark-charcoal);
+            color: white;
+        }
+
+        /* Car Cards */
+        .feature-icon {
+            color: var(--deep-blue);
+            font-size: 1.2rem;
+        }
+
+        .car-card {
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-tag {
+            background-color: var(--coral);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark-charcoal);
+            color: var(--off-white);
+            padding: 60px 0 20px;
+        }
+
+        footer a {
+            color: var(--light-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+                <img src="logo.png" alt="Logo" width="60" height="60" class="me-2 logo-white">
+                SAHULAT PRO
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-uppercase small fw-bold">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Cars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shopping</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Flight Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+                </ul>
+                <a href="auth.html" class="btn btn-auth shadow-sm">Login / SignUp</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3">Your Journey, Our Priority</h1>
+            <p class="lead fs-4">Premium Car Rental & Airport Shuttles in Pakistan</p>
+        </div>
+    </header>
+
+   <section class="container mb-5">
+        <div class="search-container">
+            <div class="row mb-4 justify-content-center">
+                <div class="col-auto">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="serviceType" id="radioCar" value="car" checked onchange="toggleService()">
+                        <label class="form-check-label fw-bold" for="radioCar">🚗 Car Search</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="serviceType" id="radioShuttle" value="shuttle" onchange="toggleService()">
+                        <label class="form-check-label fw-bold" for="radioShuttle">✈️ Airport Shuttle</label>
+                    </div>
+                </div>
+            </div>
+
+            <form class="row g-3" id="carForm">
+                <div class="col-md-3">
+                    <label class="form-label fw-bold small">Trip Type</label>
+                    <select class="form-select border-0 bg-light">
+                        <option>Within City</option>
+                        <option>Out of City</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold small">Pickup City</label>
+                    <select class="form-select border-0 bg-light" id="citySelect" required>
+                        <option value="">Select City</option>
+                        <option>Karachi</option>
+                        <option>Lahore</option>
+                        <option>Islamabad</option>
+                        <option>Faisalabad</option>
+                        <option>Multan</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold small">Date & Time</label>
+                    <input type="datetime-local" id="carDate" class="form-control border-0 bg-light" required>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-search w-100 py-2 fw-bold">SEARCH CARS</button>
+                </div>
+            </form>
+
+            <form class="row g-3 d-none" id="shuttleForm">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold small">Select Airport</label>
+                    <select class="form-select border-0 bg-light" required>
+                        <option value="">Choose Airport</option>
+                        <option>Jinnah International (KHI)</option>
+                        <option>Allama Iqbal International (LHE)</option>
+                        <option>Islamabad International (ISB)</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold small">Flight Arrival/Departure Time</label>
+                    <input type="datetime-local" id="shuttleDate" class="form-control border-0 bg-light" required>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-search w-100 py-2 fw-bold" style="background-color: var(--coral);">FIND SHUTTLE</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="results-section" class="container mb-5 d-none">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Available Fleet</h2>
+            <p class="text-muted" id="result-count"></p>
+        </div>
+        <div class="row g-4" id="car-results-container">
+        </div>
+    </section>
+
+    <section class="bg-white py-5">
+        <div class="container text-center py-5">
+            <h2 class="fw-bold mb-5">Why Choose SAHULAT PRO</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <i class="bi bi-shield-check display-4 text-danger mb-3"></i>
+                        <h4 class="fw-bold">Secure Payments</h4>
+                        <p class="text-muted small">JazzCash, Easypaisa, and PayFast integration.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <i class="bi bi-geo-alt display-4 text-primary mb-3"></i>
+                        <h4 class="fw-bold">Live Tracking</h4>
+                        <p class="text-muted small">Real-time GPS tracking via Google Maps.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <i class="bi bi-person-badge display-4 text-success mb-3"></i>
+                        <h4 class="fw-bold">Verified Drivers</h4>
+                        <p class="text-muted small">KYC verified professionals for your safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <img src="logo.png" alt="Logo" width="80" class="mb-3 logo-white">
+                    <h4 class="fw-bold">SAHULAT PRO</h4>
+                    <p class="small opacity-75">Premium transport solutions prepared by Athar Javed. Your trusted
+                        partner for every journey.</p>
+                </div>
+                <div class="col-md-4 ps-md-5">
+                    <h5 class="fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#">Terms of Service</a></li>
+                        <li class="mb-2"><a href="#">Refund Policy</a></li>
+                        <li class="mb-2"><a href="#">Driver Registration</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-4">Contact Support</h5>
+                    <p class="small mb-1"><i class="bi bi-telephone me-2"></i> +92 300 1234567</p>
+                    <p class="small mb-1"><i class="bi bi-envelope me-2"></i> support@sahulatpro.com</p>
+                    <div class="mt-4">
+                        <i class="bi bi-facebook me-3 fs-5"></i>
+                        <i class="bi bi-instagram me-3 fs-5"></i>
+                        <i class="bi bi-whatsapp fs-5"></i>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-5 opacity-25">
+            <p class="text-center small opacity-50 mb-0">© 2026 SAHULAT PRO | Developed by CodeSet Solutions</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+    
+           
+
+            // Re-usable function to display items
+            function renderResults(data, cityOrAirport) {
+                const container = document.getElementById('car-results-container');
+                const resultsSection = document.getElementById('results-section');
+
+                container.innerHTML = "";
+                resultsSection.classList.remove('d-none');
+
+                data.forEach(item => {
+                    container.innerHTML += `
+            <div class="col-md-4">
+                <div class="card car-card shadow-sm h-100">
+                    <div class="position-relative">
+                        <img src="${item.img}" class="card-img-top" alt="Vehicle" style="height:220px; object-fit:cover;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="price-tag">PKR ${item.price}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">${item.name} <span class="text-muted small">(${item.model})</span></h5>
+                        <p class="small text-muted mb-3"><i class="bi bi-geo-alt"></i> Available for ${cityOrAirport}</p>
+                        <div class="row g-2 text-center mb-3">
+                            <div class="col-3">
+                                <div class="bg-light p-2 rounded">
+                                    <i class="bi bi-gear-wide-connected feature-icon"></i>
+                                    <div style="font-size:0.7rem">${item.gear}</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="bg-light p-2 rounded">
+                                    <i class="bi bi-people feature-icon"></i>
+                                    <div style="font-size:0.7rem">${item.seats} Seats</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="bg-light p-2 rounded">
+                                    <i class="bi bi-shield-lock feature-icon"></i>
+                                    <div style="font-size:0.7rem">${item.airbags}</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="bg-light p-2 rounded">
+                                    <i class="bi bi-cpu feature-icon"></i>
+                                    <div style="font-size:0.7rem">Anti-Theft</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100 fw-bold" style="background-color: var(--deep-blue); border:none;">BOOK NOW</button>
+                    </div>
+                </div>
+            </div>
+        `;
+                });
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Handle Car Form Submit
+            document.getElementById('carForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const city = document.getElementById('citySelect').value;
+                renderResults(dummyCars, city); // dummyCars is your existing array
+            });
+
+            // Handle Shuttle Form Submit
+            document.getElementById('shuttleForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const airport = document.querySelector('#shuttleForm select').value;
+                renderResults(dummyShuttles, airport);
+            });
+        // Realistic Fleet for SAHULAT PRO (Pakistan Market)
+            const dummyCars = [
+                {
+                    name: "Toyota Corolla Altis",
+                    model: "2023",
+                    price: "8,500",
+                    // Clearer, professional Toyota Corolla image
+                    img: "https://images.unsplash.com/photo-1623860840536-a382b3d27231?q=80&w=800",
+                    gear: "Auto",
+                    seats: "5",
+                    airbags: "Dual",
+                    theft: "GPS Armed"
+                },
+                {
+                    name: "Honda Civic RS",
+                    model: "2022",
+                    price: "12,000",
+                    // Premium White Honda Civic style
+                    img: "https://images.unsplash.com/photo-1590362891175-3794ef1e992f?q=80&w=800",
+                    gear: "CVT",
+                    seats: "5",
+                    airbags: "6 SRS",
+                    theft: "Immobilizer"
+                },
+                {
+                    name: "Suzuki Alto VXL",
+                    model: "2023",
+                    price: "4,500",
+                    // Economy hatchback for daily rental
+                    img: "https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?q=80&w=800",
+                    gear: "AGS",
+                    seats: "4",
+                    airbags: "Dual",
+                    theft: "Standard"
+                }
+            ];
+
+            const dummyShuttles = [
+                {
+                    name: "Toyota Hiace (Grandia)",
+                    model: "2022",
+                    price: "15,000",
+                    // Standard high-roof van for airport pick/drop
+                    img: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3AtNDAyLW11bmlyLXN0dWRpby1hLXNldC0zNjk5LmpwZw.jpg",
+                    gear: "Manual",
+                    seats: "12",
+                    airbags: "Front",
+                    theft: "GPS Armed"
+                },
+                {
+                    name: "Hyundai Staria",
+                    model: "2023",
+                    price: "18,000",
+                    // Modern luxury shuttle
+                    img: "https://images.unsplash.com/photo-1632243193741-b308ad3d02c3?q=80&w=800",
+                    gear: "Auto",
+                    seats: "10",
+                    airbags: "8 SRS",
+                    theft: "Advanced"
+                },
+                {
+                    name: "Coaster Saloon",
+                    model: "2021",
+                    price: "25,000",
+                    // For large groups/families
+                    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800",
+                    gear: "Manual",
+                    seats: "22",
+                    airbags: "None",
+                    theft: "Standard"
+                }
+            ];
+
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const container = document.getElementById('car-results-container');
+            const resultsSection = document.getElementById('results-section');
+            const city = document.getElementById('citySelect').value;
+
+            container.innerHTML = "";
+            resultsSection.classList.remove('d-none');
+
+            dummyCars.forEach(car => {
+                container.innerHTML += `
+                    <div class="col-md-4">
+                        <div class="card car-card shadow-sm h-100">
+                            <div class="position-relative">
+                                <img src="${car.img}" class="card-img-top" alt="Car" style="height:220px; object-fit:cover;">
+                                <div class="position-absolute top-0 end-0 m-3">
+                                    <span class="price-tag">PKR ${car.price}</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="fw-bold">${car.name} <span class="text-muted small">(${car.model})</span></h5>
+                                <p class="small text-muted mb-3"><i class="bi bi-geo-alt"></i> Available in ${city}</p>
+                                <div class="row g-2 text-center mb-3">
+                                    <div class="col-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-gear-wide-connected feature-icon"></i>
+                                            <div style="font-size:0.7rem">${car.gear}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-people feature-icon"></i>
+                                            <div style="font-size:0.7rem">${car.seats} Seats</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-shield-lock feature-icon"></i>
+                                            <div style="font-size:0.7rem">${car.airbags}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="bg-light p-2 rounded">
+                                            <i class="bi bi-cpu feature-icon"></i>
+                                            <div style="font-size:0.7rem">Anti-Theft</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary w-100 fw-bold" style="background-color: var(--deep-blue); border:none;">BOOK THIS CAR</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+    <script>
+        // Toggle between Car and Shuttle forms
+        function toggleService() {
+            const isCar = document.getElementById('radioCar').checked;
+            const carForm = document.getElementById('carForm');
+            const shuttleForm = document.getElementById('shuttleForm');
+            const resultsSection = document.getElementById('results-section');
+
+            if (isCar) {
+                carForm.classList.remove('d-none');
+                shuttleForm.classList.add('d-none');
+            } else {
+                carForm.classList.add('d-none');
+                shuttleForm.classList.remove('d-none');
+            }
+            // Hide results when switching
+            resultsSection.classList.add('d-none');
+        }
+
+        // Initialize Min Dates for Calendars
+        window.onload = function () {
+            const now = new Date();
+            const offset = now.getTimezoneOffset() * 60000;
+            const localISOTime = (new Date(now - offset)).toISOString().slice(0, 16);
+
+            document.getElementById('carDate').setAttribute('min', localISOTime);
+            document.getElementById('shuttleDate').setAttribute('min', localISOTime);
+        };
+
+        // Update the search logic for both forms
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Call your existing search results logic here
+                displayCars();
+            });
+        });
+
+        function displayCars() {
+            const container = document.getElementById('car-results-container');
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.classList.remove('d-none');
+            // (Existing dummyCars loop logic here...)
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+    <script>
+        // Set minimum date to "Now" so users can't book in the past
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        // Format: YYYY-MM-DDTHH:MM
+        const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+        const currentDateOnly = `${year}-${month}-${day}`;
+
+        if (document.getElementById('pickup_date')) {
+            document.getElementById('pickup_date').setAttribute('min', currentDateTime);
+        }
+        if (document.getElementById('flight_date')) {
+            document.getElementById('flight_date').setAttribute('min', currentDateOnly);
+        }
+    </script>
+</body>
+
+</html>
