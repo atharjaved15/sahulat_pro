@@ -87,12 +87,13 @@
             z-index: 10;
         }
 
-        /* Original Car Card Styling */
+        /* Premium Car Card Styling */
         .car-card {
             border: none;
             transition: transform 0.3s, box-shadow 0.3s;
             border-radius: 15px;
             overflow: hidden;
+            background: white;
         }
 
         .car-card:hover {
@@ -106,11 +107,20 @@
             padding: 5px 15px;
             border-radius: 20px;
             font-weight: bold;
+            z-index: 5;
         }
 
         .feature-icon {
             color: var(--deep-blue);
             font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .feature-box {
+            background-color: #f8f9fa;
+            padding: 10px 5px;
+            border-radius: 10px;
+            border: 1px solid #eee;
         }
 
         /* Mid Carousel */
@@ -220,8 +230,28 @@
                     </select>
                 </div>
                 <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-search w-100 py-2 fw-bold"
-                        style="background:var(--deep-blue); color:white;">SEARCH CARS</button>
+                    <button type="submit" class="btn w-100 py-2 fw-bold text-white"
+                        style="background:var(--deep-blue);">SEARCH CARS</button>
+                </div>
+            </form>
+
+            <form class="row g-3 d-none" id="shuttleForm">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold small">Select Airport</label>
+                    <select class="form-select border-0 bg-light" required>
+                        <option value="">Choose Airport</option>
+                        <option>Jinnah International (KHI)</option>
+                        <option>Allama Iqbal International (LHE)</option>
+                        <option>Islamabad International (ISB)</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold small">Flight Arrival/Departure Time</label>
+                    <input type="datetime-local" class="form-control border-0 bg-light" required>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn w-100 py-2 fw-bold text-white"
+                        style="background:var(--coral);">FIND SHUTTLE</button>
                 </div>
             </form>
         </div>
@@ -238,14 +268,6 @@
                         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
                             <h5>Wedding Season Discount</h5>
                             <p>Get 15% off on Audi & Mercedes rentals.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1200"
-                            class="d-block w-100" style="height:350px; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-                            <h5>Northern Areas Tour</h5>
-                            <p>Special 4x4 packages for Hunza & Skardu.</p>
                         </div>
                     </div>
                 </div>
@@ -312,16 +334,24 @@
     <script>
         const dummyCars = [
             { name: "Toyota Corolla Altis", model: "2023", price: "8,500", img: "https://images.unsplash.com/photo-1623860840536-a382b3d27231?q=80&w=800", gear: "Auto", seats: "5", airbags: "Dual" },
-            { name: "Honda Civic RS", model: "2022", price: "12,000", img: "https://images.unsplash.com/photo-1590362891175-3794ef1e992f?q=80&w=800", gear: "CVT", seats: "5", airbags: "6 SRS" }
+            { name: "Honda Civic RS", model: "2022", price: "12,000", img: "https://images.unsplash.com/photo-1590362891175-3794ef1e992f?q=80&w=800", gear: "CVT", seats: "5", airbags: "6 SRS" },
+            { name: "Suzuki Alto VXL", model: "2023", price: "4,500", img: "https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?q=80&w=800", gear: "AGS", seats: "4", airbags: "Dual" }
         ];
 
-        function toggleService() { }
+        // Fixed Toggle Logic
+        function toggleService() {
+            const isCar = document.getElementById('radioCar').checked;
+            document.getElementById('carForm').classList.toggle('d-none', !isCar);
+            document.getElementById('shuttleForm').classList.toggle('d-none', isCar);
+        }
 
-        document.getElementById('carForm').addEventListener('submit', function (e) {
+        // Search Handlers
+        function handleSearch(e) {
             e.preventDefault();
             const container = document.getElementById('car-results-container');
             document.getElementById('results-section').classList.remove('d-none');
             container.innerHTML = "";
+
             dummyCars.forEach(item => {
                 container.innerHTML += `
                 <div class="col-md-4">
@@ -331,20 +361,23 @@
                             <div class="position-absolute top-0 end-0 m-3"><span class="price-tag">PKR ${item.price}</span></div>
                         </div>
                         <div class="card-body">
-                            <h5 class="fw-bold">${item.name} <span class="text-muted small">(${item.model})</span></h5>
-                            <div class="row g-2 text-center mb-3 mt-3">
-                                <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-gear-wide-connected feature-icon"></i><div style="font-size:0.7rem">${item.gear}</div></div></div>
-                                <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-people feature-icon"></i><div style="font-size:0.7rem">${item.seats}</div></div></div>
-                                <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-shield-lock feature-icon"></i><div style="font-size:0.7rem">${item.airbags}</div></div></div>
-                                <div class="col-3"><div class="bg-light p-2 rounded"><i class="bi bi-cpu feature-icon"></i><div style="font-size:0.7rem">GPS</div></div></div>
+                            <h5 class="fw-bold mb-3">${item.name} <span class="text-muted fw-normal" style="font-size:0.9rem">(${item.model})</span></h5>
+                            <div class="row g-2 text-center mb-4">
+                                <div class="col-3"><div class="feature-box"><i class="bi bi-gear-wide-connected feature-icon d-block"></i><span style="font-size:0.7rem; font-weight:600;">${item.gear}</span></div></div>
+                                <div class="col-3"><div class="feature-box"><i class="bi bi-people feature-icon d-block"></i><span style="font-size:0.7rem; font-weight:600;">${item.seats}</span></div></div>
+                                <div class="col-3"><div class="feature-box"><i class="bi bi-shield-lock feature-icon d-block"></i><span style="font-size:0.7rem; font-weight:600;">${item.airbags}</span></div></div>
+                                <div class="col-3"><div class="feature-box"><i class="bi bi-cpu feature-icon d-block"></i><span style="font-size:0.7rem; font-weight:600;">GPS</span></div></div>
                             </div>
-                            <button onclick="window.location.href='payment.html'" class="btn btn-primary w-100 fw-bold" style="background-color: var(--deep-blue); border:none;">BOOK NOW</button>
+                            <button onclick="window.location.href='payment.html'" class="btn btn-primary w-100 fw-bold py-2" style="background-color: var(--deep-blue); border:none; border-radius:10px;">BOOK NOW</button>
                         </div>
                     </div>
                 </div>`;
             });
             document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
-        });
+        }
+
+        document.getElementById('carForm').addEventListener('submit', handleSearch);
+        document.getElementById('shuttleForm').addEventListener('submit', handleSearch);
     </script>
 </body>
 
