@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Ride | SAHULAT PRO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="map-container">
+        <iframe width="100%" height="100%" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.5515350276617!2d74.34091647614946!3d31.481521149090623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919044a14f4e3c9%3A0x867046e7f722e11a!2sLahore%2C%20Pakistan!5e0!3m2!1sen!2s!4v1700000000000"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="container tracking-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="status-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Track Ride <span class="text-muted"
+                                style="font-size: 0.8rem;">#SP-9921</span></h5>
+                        <span class="badge bg-success">Live Tracking</span>
+                    </div>
+
+                    <div class="driver-box d-flex align-items-center mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Ahmed+Khan&background=0077B3&color=fff"
+                            class="rounded-circle me-3" width="50">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 fw-bold">Ahmed Khan</h6>
+                            <p class="small text-muted mb-0">Toyota Corolla (BKK-542)</p>
+                        </div>
+                        <a href="tel:+923001234567" class="btn btn-call"><i class="bi bi-telephone-fill"></i></a>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4">
+                        <div class="step completed">
+                            <div class="circle"><i class="bi bi-check-lg"></i></div>
+                            <div class="step-text">
+                                <h6>Booking Done</h6>
+                                <p>Confirmed at 10:30 AM</p>
+                            </div>
+                        </div>
+
+                        <div class="step active">
+                            <div class="circle"><i class="bi bi-car-front-fill"></i></div>
+                            <div class="step-text">
+                                <h6>Driver Arriving</h6>
+                                <p>Approx. 4 mins away</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="circle">3</div>
+                            <div class="step-text">
+                                <h6>Waiting to Pick</h6>
+                                <p>Driver will wait for 10 mins</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="circle">4</div>
+                            <div class="step-text">
+                                <h6>On the way to Destination</h6>
+                                <p>Estimated travel time: 25 mins</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="circle">5</div>
+                            <div class="step-text">
+                                <h6>Reached & Completed</h6>
+                                <p>Final destination point</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-danger mt-3 fw-bold rounded-pill"
+                            onclick="alert('Support contacted!')">HELP & SUPPORT</button>
+                        <a href="index.html" class="btn btn-link text-muted text-decoration-none small">Back to
+                            Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

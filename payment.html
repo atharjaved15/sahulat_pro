@@ -10,131 +10,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <style>
-        :root {
-            --primary-blue: #0077B3;
-            --dark: #1A1A1A;
-            --glass: rgba(255, 255, 255, 0.8);
-            --border: #E5E7EB;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            color: var(--dark);
-        }
-
-        .payment-wrapper {
-            padding: 40px 0;
-        }
-
-        /* High-End Credit Card */
-        .card-visual {
-            width: 100%;
-            max-width: 400px;
-            height: 240px;
-            background: linear-gradient(135deg, #001f3f, #0077B3);
-            border-radius: 24px;
-            padding: 30px;
-            color: white;
-            position: relative;
-            z-index: 5;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
-            margin: 0 auto -80px;
-            transition: transform 0.4s ease;
-        }
-
-        .card-visual:hover {
-            transform: translateY(-10px) rotateX(5deg);
-        }
-
-        .chip {
-            width: 50px;
-            height: 40px;
-            background: linear-gradient(135deg, #ffd700, #b8860b);
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .card-number-display {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Professional Form Container */
-        .checkout-box {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid white;
-            border-radius: 30px;
-            padding: 100px 50px 50px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #4B5563;
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            border: 2px solid var(--border);
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(0, 119, 179, 0.1);
-        }
-
-        .order-summary {
-            background: rgba(0, 119, 179, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px dashed var(--primary-blue);
-        }
-
-        .btn-pay-now {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(0, 119, 179, 0.3);
-            transition: all 0.3s;
-        }
-
-        .btn-pay-now:hover {
-            background: #005f8d;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(0, 119, 179, 0.4);
-        }
-
-        .bank-logos img {
-            opacity: 0.6;
-            filter: grayscale(1);
-            transition: 0.3s;
-            margin: 0 10px;
-        }
-
-        .bank-logos img:hover {
-            opacity: 1;
-            filter: grayscale(0);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="checkout-page-bg" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
 
     <div class="container payment-wrapper">
         <div class="row justify-content-center">
@@ -166,7 +45,7 @@
 
                 <div class="checkout-box">
                     <div class="text-center mb-5">
-                        <h3 class="fw-700">Payment Details</h3>
+                        <h3 class="fw-bold">Payment Details</h3>
                         <p class="text-muted small">Complete your booking for Sahulat Pro</p>
                     </div>
 
@@ -214,7 +93,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-pay-now w-100">
+                        <button type="submit" class="btn-pay-now">
                             <i class="bi bi-lock-fill me-2"></i> PAY SECURELY
                         </button>
                     </form>
@@ -271,7 +150,6 @@
             }, 2000);
         });
     </script>
-
 </body>
 
 </html>
